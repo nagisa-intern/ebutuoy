@@ -1,4 +1,4 @@
-FROM go:1.8
+FROM golang:1.8
 
 WORKDIR /go
 ADD . /go
