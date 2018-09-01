@@ -11,6 +11,7 @@ import (
 func main() {
 
 	e := echo.New()
+	e.GET("/ping", pong)
 
 	r, err := router.New()
 	if err != nil {
@@ -22,8 +23,15 @@ func main() {
 	}
 	e.Use(session.Middleware(store))
 
-	e.GET("/ping", pong)
-	e.POST("/me", r.PostMe)
+	api := e.Group("/api")
+
+	api.POST("/me", r.PostMe)
+	api.POST("/login", r.PostLogin)
+
+	api.Use(r.WithLogin)
+	api.GET("/logined_ping", func(c echo.Context) error {
+		return c.String(http.StatusOK, "pong")
+	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
