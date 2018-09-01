@@ -12,6 +12,7 @@ def hello_world():
 def on_push():
     try:
       res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d')
+      print(res)
     except Exception as e:
       print(e)
     return "OK"
