@@ -42,6 +42,7 @@ func main() {
 	api.GET("/comics/:id", r.GetComicByID)
 	api.GET("/comics/:id/comments", r.GetCommentsByID)
 	api.POST("/comics/:id/comments", r.PostCommentsByID)
+	api.GET("/timeline", r.GetTimeline)
 	api.GET("/logined_ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
 	})
