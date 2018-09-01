@@ -1,4 +1,4 @@
-FROM go:latest
+FROM go:1.8
 
 WORKDIR /go
 ADD . /go
