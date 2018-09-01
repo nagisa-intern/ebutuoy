@@ -11,22 +11,27 @@ services:
       MYSQL_USERNAME: test #$MYSQL_USERNAME
       MYSQL_PASSWORD: testt #$MYSQL_PASSWORD
       # - MYSQL_PORT: #$MYSQL_PORT
+    ports:
+      - "3306:3306"
   
   server:
     build: 
       context: .
-      dockerfile: ./Docker/server
+      dockerfile: ./Docker/server/Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test #$MYSQL_DB_NAME
-      MYSQL_USERNAME: test #$MYSQL_USERNAME
-      MYSQL_PASSWORD: testt #$MYSQL_PASSWORD
+      MYSQL_DB_NAME: test #$MYSQL_DB_NAME
+      MYSQL_USERNAME: root #$MYSQL_USERNAME
+      MYSQL_PASSWORD: root #$MYSQL_PASSWORD
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysql
     ports:
       - "1323:1323"
 
   nginx:
-    build: 
-      dockerfile: ./Docker/nginx
+    build: ./Docker/nginx
     ports:
       - "80:80"
       - "443:443"
