@@ -14,6 +14,7 @@ def on_push():
       res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d')
     except Exception as e:
       print(e)
+    return res
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=80)
