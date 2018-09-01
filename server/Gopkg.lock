@@ -2,12 +2,44 @@
 
 
 [[projects]]
+  digest = "1:76dc72490af7174349349838f2fe118996381b31ea83243812a97e5a0fd5ed55"
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+  version = "v3.2.0"
+
+[[projects]]
   digest = "1:adea5a94903eb4384abef30f3d878dc9ff6b6b5b0722da25b82e5169216dfb61"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   pruneopts = "UT"
   revision = "d523deb1b23d913de5bdada721a6071e71283618"
   version = "v1.4.0"
+
+[[projects]]
+  digest = "1:c79fb010be38a59d657c48c6ba1d003a8aa651fa56b579d959d74573b7dff8e1"
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:e72d1ebb8d395cf9f346fd9cbc652e5ae222dd85e0ac842dc57f175abed6d195"
+  name = "github.com/gorilla/securecookie"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:0fe783ea0c04c7d13f7c55d8f74b01b17e18a8320e7deecf578b41ef99b27205"
+  name = "github.com/gorilla/sessions"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "03b6f63cc43ef9c7240a635a5e22b13180e822b8"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:b6f4477f09f11785097a121811f3a90d8d26cab73c1aa71abda859bdf6ad2334"
@@ -29,19 +61,32 @@
   revision = "04140366298a54a039076d798123ffa108fff46c"
 
 [[projects]]
-  digest = "1:26971a24734a1b911111711f981ffc7463361b36483456f33da623570b7d214c"
+  digest = "1:87f801436ec4799e0e043ab348ff9f3e95b1b3761138158f0950ac67695cc272"
   name = "github.com/labstack/echo"
-  packages = ["."]
+  packages = [
+    ".",
+    "middleware",
+  ]
   pruneopts = "UT"
   revision = "6d227dfea4d2e52cb76856120b3c17f758139b4e"
   version = "3.3.5"
 
 [[projects]]
-  digest = "1:faee5b9f53eb1ae4eb04708c040c8c4dd685ce46509671e57a08520a15c54368"
+  digest = "1:431646838dda93dfb384c1010fca1bb0353c1ee030910d926bb64b32f1ba253a"
+  name = "github.com/labstack/echo-contrib"
+  packages = ["session"]
+  pruneopts = "UT"
+  revision = "7d9d9632a4aadf9b026436e43d5f96eca2d895a6"
+  version = "0.5.2"
+
+[[projects]]
+  digest = "1:568171fc14a3d819b112c3e219d351ea7b05e8dad7935c4168c6b3373244a686"
   name = "github.com/labstack/gommon"
   packages = [
+    "bytes",
     "color",
     "log",
+    "random",
   ]
   pruneopts = "UT"
   revision = "d6898124de917583f5ff5592ef931d1dfe0ddc05"
@@ -65,6 +110,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:0e619674d8b0093f87768441dc1a073df7c2f25d058c862813f5bc9528fb0d09"
+  name = "github.com/srinathgs/mysqlstore"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4f803440ed5b694a6499ba6310dc14245910fc3e"
+
+[[projects]]
+  branch = "master"
   digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
@@ -81,11 +134,13 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:dedf20eb0d3e8d6aa8a4d3d2fae248222b688ed528201995e152cc497899123c"
+  digest = "1:4d2d4c25ade9a47aee073249abe73ac441e73d6748286bac404c0bfddc6cdd4a"
   name = "golang.org/x/crypto"
   packages = [
     "acme",
     "acme/autocert",
+    "bcrypt",
+    "blowfish",
   ]
   pruneopts = "UT"
   revision = "182538f80094b6a8efaade63a8fd8e0d9d5843dd"
@@ -113,6 +168,9 @@
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/mysql",
     "github.com/labstack/echo",
+    "github.com/labstack/echo-contrib/session",
+    "github.com/srinathgs/mysqlstore",
+    "golang.org/x/crypto/bcrypt",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

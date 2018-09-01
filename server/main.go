@@ -4,20 +4,26 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/nagisa-intern/ebutuoy/server/db"
+	"github.com/labstack/echo-contrib/session"
+	"github.com/nagisa-intern/ebutuoy/server/router"
 )
 
 func main() {
-	dbManager := db.New()
-	if err := dbManager.Connect(); err != nil {
-		panic(err)
-	}
-
-	dbManager.Sync()
 
 	e := echo.New()
 
+	r, err := router.New()
+	if err != nil {
+		panic(err)
+	}
+	store, err := r.CreateSessionStore()
+	if err != nil {
+		panic(err)
+	}
+	e.Use(session.Middleware(store))
+
 	e.GET("/ping", pong)
+	e.POST("/me", r.PostMe)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 

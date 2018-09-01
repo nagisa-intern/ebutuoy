@@ -8,15 +8,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func New() *DBManager {
-	return &DBManager{}
-}
-
-type DBManager struct {
-	DB *gorm.DB
-}
-
-func (d *DBManager) Connect() error {
+func New() (*gorm.DB, error) {
 	username := os.Getenv("MYSQL_USERNAME")
 	if username == "" {
 		username = "root"
@@ -44,14 +36,10 @@ func (d *DBManager) Connect() error {
 
 	db, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", username, password, host, port, dbname))
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	d.DB = db
+	db.AutoMigrate(&Comic{}, &Author{}, &ComicData{}, &ComicAuthor{}, &User{}, &UserCredential{}, &Comment{}, &Friendship{})
 
-	return nil
-}
-
-func (d *DBManager) Sync() {
-	d.DB.AutoMigrate(&Comic{}, &Author{}, &ComicData{}, &ComicAuthor{}, &User{}, &UserCredential{}, &Comment{}, &Friendship{})
+	return db, nil
 }
