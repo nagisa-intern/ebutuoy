@@ -30,10 +30,14 @@ func main() {
 
 	api.Use(r.WithLogin)
 	api.POST("/logout", r.PostLogout)
+	api.GET("/users/:id", r.GetUserByID)
+	api.GET("/me", r.GetMe)
+	api.POST("/users/:id/friendship", r.PostFriendship)
+	api.DELETE("/users/:id/friendship", r.DeleteFriendship)
 	api.GET("/logined_ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
 	})
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start("localhost:1323"))
 }
 
 func pong(c echo.Context) error {

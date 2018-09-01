@@ -34,8 +34,8 @@ func (ca ComicAuthor) TableName() string {
 
 type User struct {
 	gorm.Model
-	Username   string
-	Credential UserCredential
+	Username   string         `json:"username"`
+	Credential UserCredential `json:"-"`
 }
 
 type UserCredential struct {
