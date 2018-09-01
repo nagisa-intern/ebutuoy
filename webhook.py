@@ -11,7 +11,7 @@ def hello_world():
 @app.route("/webhook", methods=['POST'])
 def on_push():
     try:
-      res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d /usr/local/bin/')
+      res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d') # /usr/local/bin/
       print(res)
     except Exception as e:
       print(e)
