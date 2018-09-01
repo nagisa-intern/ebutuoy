@@ -1,5 +1,4 @@
 # Dosukoi
-from github_webhook import Webhook
 from flask import Flask
 import subprocess
 
@@ -10,7 +9,7 @@ webhook = Webhook(app) # Defines '/postreceive' endpoint
 def hello_world():
     return "Hello, World!"
 
-@webhook.hook()        # Defines a handler for the 'push' event
+@app.route("/webhook", methods=['POST'])
 def on_push(data):
     print("Got push with: {0}".format(data))
     try:
