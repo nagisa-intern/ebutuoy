@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
   handler(req, res, (req, res) => {
     res.send('Not found')
   })
-}).listen(80)
+}).listen(3000)
 
 handler.on('push', event => {
   const payload = event.payload

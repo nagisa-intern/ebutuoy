@@ -13,9 +13,23 @@ services:
       # - MYSQL_PORT: #$MYSQL_PORT
   
   server:
-    build: ./Docker/server
+    build: 
+      context: .
+      dockerfile: ./Docker/server
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test #$MYSQL_DB_NAME
+      MYSQL_USERNAME: test #$MYSQL_USERNAME
+      MYSQL_PASSWORD: testt #$MYSQL_PASSWORD
     ports:
       - "1323:1323"
+
+  nginx:
+    build: 
+      dockerfile: ./Docker/nginx
+    ports:
+      - "80:80"
+      - "443:443"
 
 #   server:
   
