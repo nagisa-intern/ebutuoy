@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test #$MYSQL_DB_NAME
       MYSQL_USERNAME: test #$MYSQL_USERNAME
-      MYSQL_PASSWORD: testt #$MYSQL_PASSWORD
+      MYSQL_PASSWORD: test #$MYSQL_PASSWORD
       # - MYSQL_PORT: #$MYSQL_PORT
   
   server:
