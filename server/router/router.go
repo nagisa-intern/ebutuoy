@@ -46,6 +46,7 @@ func (r *Router) WithLogin(next echo.HandlerFunc) echo.HandlerFunc {
 		if sess.Values["user_id"] == nil {
 			return c.JSON(http.StatusForbidden, M{"please login"})
 		}
+		c.Set("userID", sess.Values["user_id"])
 
 		return next(c)
 	}
@@ -115,6 +116,20 @@ func (r *Router) PostLogin(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, M{"something wrong in getting session"})
 	}
 	sess.Values["user_id"] = user.ID
+	if err := sess.Save(c.Request(), c.Response()); err != nil {
+		fmt.Println(err)
+	}
+
+	return c.NoContent(http.StatusOK)
+}
+
+func (r *Router) PostLogout(c echo.Context) error {
+	sess, err := session.Get("sessions", c)
+	if err != nil {
+		fmt.Println(err)
+		return c.JSON(http.StatusInternalServerError, M{"something wrong in getting session"})
+	}
+	sess.Values["user_id"] = nil
 	if err := sess.Save(c.Request(), c.Response()); err != nil {
 		fmt.Println(err)
 	}

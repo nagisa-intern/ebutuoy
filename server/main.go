@@ -29,6 +29,7 @@ func main() {
 	api.POST("/login", r.PostLogin)
 
 	api.Use(r.WithLogin)
+	api.POST("/logout", r.PostLogout)
 	api.GET("/logined_ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
 	})
