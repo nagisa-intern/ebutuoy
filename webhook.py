@@ -10,7 +10,7 @@ def hello_world():
     return "Hello, World!"
 
 @app.route("/webhook", methods=['POST'])
-def on_push(data):
+def on_push():
     print("Got push with: {0}".format(data))
     try:
       res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d')
