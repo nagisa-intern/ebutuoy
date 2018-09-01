@@ -141,3 +141,20 @@ func (r *Router) GetMyFollowers(c echo.Context) error {
 	r.db.Joins("LEFT JOIN friendships ON friendships.user_id = users.id").Where("friendships.follow_user_id = ? AND friendships.deleted_at IS NULL", myID).Find(users)
 	return c.JSON(http.StatusOK, users)
 }
+
+func (r *Router) GetCommentsByUserID(c echo.Context) error {
+	userID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, M{"id is not a number"})
+	}
+	comments := &[]db.Comment{}
+	r.db.Where("user_id = ?", userID).Find(comments)
+	return c.JSON(http.StatusOK, comments)
+}
+
+func (r *Router) GetMyComments(c echo.Context) error {
+	myID := c.Get("userID").(int)
+	comments := &[]db.Comment{}
+	r.db.Where("user_id = ?", myID).Find(comments)
+	return c.JSON(http.StatusOK, comments)
+}

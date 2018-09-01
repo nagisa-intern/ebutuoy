@@ -3,29 +3,29 @@ package db
 import "github.com/jinzhu/gorm"
 
 type Comic struct {
-	ID      int
-	Title   string `gorm:"size:255"`
-	Summary string `sql:"type:text"`
+	ID      int    `json:"id"`
+	Title   string `gorm:"size:255" json:"title"`
+	Summary string `sql:"type:text" json:"summary"`
 }
 
 type Author struct {
-	ID   int
-	Name string `gorm:"size:255"`
-	Info string `sql:"type:text"`
+	ID   int    `json:"id"`
+	Name string `gorm:"size:255" json:"name"`
+	Info string `sql:"type:text" json:"info"`
 }
 
 type ComicData struct {
-	ID       int
-	ComicID  int
-	Title    string `gorm:"size:255"`
-	Episode  int
-	Page     int
-	Comments []*Comment
+	ID       int        `json:"id"`
+	ComicID  int        `json:"comic_id"`
+	Title    string     `gorm:"size:255" json:"title"`
+	Episode  int        `json:"episode"`
+	Page     int        `json:"page"`
+	Comments []*Comment `json:"comments"`
 }
 
 type ComicAuthor struct {
-	ComicID  int
-	AuthorID int
+	ComicID  int `json:"comic_id"`
+	AuthorID int `json:"author_id"`
 }
 
 func (ca ComicAuthor) TableName() string {
@@ -40,20 +40,20 @@ type User struct {
 
 type UserCredential struct {
 	gorm.Model
-	UserID   int
-	Password string
+	UserID   int    `json:"user_id"`
+	Password string `json:"password"`
 }
 
 type Comment struct {
 	gorm.Model
-	ComicID  int
-	UserID   int
-	Content  string `sql:"type:text"`
-	AssetUrl string
+	ComicID  int    `json:"comic_id"`
+	UserID   int    `json:"user_id"`
+	Content  string `sql:"type:text" json:"content"`
+	AssetUrl string `json:"asset_url"`
 }
 
 type Friendship struct {
 	gorm.Model
-	UserID       int
-	FollowUserID int
+	UserID       int `json:"user_id"`
+	FollowUserID int `json:"follow_user_id"`
 }
