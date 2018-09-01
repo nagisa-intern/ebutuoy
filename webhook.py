@@ -3,7 +3,6 @@ from flask import Flask
 import subprocess
 
 app = Flask(__name__)  # Standard Flask app
-webhook = Webhook(app) # Defines '/postreceive' endpoint
 
 @app.route("/")        # Standard Flask endpoint
 def hello_world():
@@ -11,7 +10,6 @@ def hello_world():
 
 @app.route("/webhook", methods=['POST'])
 def on_push():
-    print("Got push with: {0}".format(data))
     try:
       res = subprocess.call('git pull ; git checkout -f infra ; docker-compose up -d')
     except Exception as e:
