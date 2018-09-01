@@ -18,20 +18,43 @@
         </el-submenu>
       </el-menu>
 
+      <!-- カルーセル　-->
+      <!--
+      <el-carousel trigger="click" height="250px" >
+        <el-carousel-item v-for="item in 4" :key="item">
+          <h3>{{ item }}</h3>
+        </el-carousel-item>
+      </el-carousel>
+      -->
+
+      <!-- 本一覧　-->
       <el-row>
         <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
           <el-card :body-style="{ padding: '0px' }">
             <img src="~/assets/images/square_thumb1.png" class="image">
             <div style="padding: 14px;">
-              <span>電波青春</span>
+              <el-badge :value="120" class="item" :max="99">
+                <span>電波青年</span>
+              </el-badge>
               <div class="bottom clearfix">
-                <time class="time">{{ currentDate }}</time>
+                <span>ほんのあらすじ</span>
+                <br>
+                <div class="hashtag">
+                  <el-tag type="info">#ホラー</el-tag>
+                </div>
+                <div class="hashtag">
+                  <el-tag type="info">#コメディー</el-tag>
+                </div>
+                <div class="hashtag">
+                  <el-tag type="info">#人気</el-tag>
+                </div>
                 <el-button type="text" class="button">本の詳細を見る</el-button>
               </div>
             </div>
           </el-card>
         </el-col>
       </el-row>
+
 
     </section>
     <!-- Footer　-->
@@ -87,6 +110,16 @@ export default {
   color: #999;
 }
 
+.item {
+  margin-left: 0px;
+}
+
+.hashtag {
+  display: inline-block;
+  margin: 5px;
+  width: auto;
+}
+
 .bottom {
   margin-top: 13px;
   line-height: 12px;
@@ -114,5 +147,20 @@ export default {
 
 .books-footer {
   margin-top: 20px;
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
 }
 </style>
