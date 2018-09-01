@@ -41,7 +41,7 @@
 
     </section>
     <!-- Footer　-->
-    <div>
+    <div class="timeline-footer">
       <AppFooter></AppFooter>
       <nuxt/>
     </div>
@@ -76,13 +76,18 @@ export default {
 
 <style>
 .container {
-  min-height: 100vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   text-align: center;
 }
+
+.el-menu-demo {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .time {
   font-size: 13px;
   color: #999;
@@ -117,5 +122,9 @@ export default {
   width: 400px;
   height: 160px;
   font-size: 15px;
+}
+
+.timeline-footer {
+  margin-top: 20px;
 }
 </style>

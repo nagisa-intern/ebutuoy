@@ -21,9 +21,9 @@
       <el-row>
         <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
           <el-card :body-style="{ padding: '0px' }">
-            <img src="~/assets/images/hamburger.png" class="image">
+            <img src="~/assets/images/square_thumb1.png" class="image">
             <div style="padding: 14px;">
-              <span>Yummy hamburger</span>
+              <span>電波青春</span>
               <div class="bottom clearfix">
                 <time class="time">{{ currentDate }}</time>
                 <el-button type="text" class="button">本の詳細を見る</el-button>
@@ -35,7 +35,7 @@
 
     </section>
     <!-- Footer　-->
-    <div>
+    <div class="books-footer">
       <AppFooter></AppFooter>
       <nuxt/>
     </div>
@@ -69,13 +69,19 @@ export default {
 
 <style>
 .container {
-  min-height: 100vh;
+
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   text-align: center;
 }
+
+.el-menu-demo {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .time {
   font-size: 13px;
   color: #999;
@@ -104,5 +110,9 @@ export default {
 
 .clearfix:after {
   clear: both
+}
+
+.books-footer {
+  margin-top: 20px;
 }
 </style>

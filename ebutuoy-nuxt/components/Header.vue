@@ -10,7 +10,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    background-color: #59bb0c;
+    background-color: #6A623D;
     color: #fff;
     text-align: left;
     padding: 15px;
