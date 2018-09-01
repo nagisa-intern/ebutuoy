@@ -109,3 +109,35 @@ func (r *Router) DeleteFriendship(c echo.Context) error {
 	r.db.Delete(friendship)
 	return c.NoContent(http.StatusOK)
 }
+
+func (r *Router) GetFollowsByID(c echo.Context) error {
+	userID := c.Param("id")
+	users := &[]db.User{}
+
+	r.db.Joins("LEFT JOIN friendships ON friendships.follow_user_id = users.id").Where("friendships.user_id = ? AND friendships.deleted_at IS NULL", userID).Find(users)
+	return c.JSON(http.StatusOK, users)
+}
+
+func (r *Router) GetFollowersByID(c echo.Context) error {
+	userID := c.Param("id")
+	users := &[]db.User{}
+
+	r.db.Joins("LEFT JOIN friendships ON friendships.user_id = users.id").Where("friendships.follow_user_id = ? AND friendships.deleted_at IS NULL", userID).Find(users)
+	return c.JSON(http.StatusOK, users)
+}
+
+func (r *Router) GetMyFollows(c echo.Context) error {
+	myID := c.Get("userID").(int)
+	users := &[]db.User{}
+
+	r.db.Joins("LEFT JOIN friendships ON friendships.follow_user_id = users.id").Where("friendships.user_id = ? AND friendships.deleted_at IS NULL", myID).Find(users)
+	return c.JSON(http.StatusOK, users)
+}
+
+func (r *Router) GetMyFollowers(c echo.Context) error {
+	myID := c.Get("userID").(int)
+	users := &[]db.User{}
+
+	r.db.Joins("LEFT JOIN friendships ON friendships.user_id = users.id").Where("friendships.follow_user_id = ? AND friendships.deleted_at IS NULL", myID).Find(users)
+	return c.JSON(http.StatusOK, users)
+}

@@ -34,6 +34,10 @@ func main() {
 	api.GET("/me", r.GetMe)
 	api.POST("/users/:id/friendship", r.PostFriendship)
 	api.DELETE("/users/:id/friendship", r.DeleteFriendship)
+	api.GET("/users/:id/follows", r.GetFollowsByID)
+	api.GET("/users/:id/followers", r.GetFollowersByID)
+	api.GET("/me/follows", r.GetMyFollows)
+	api.GET("/me/followers", r.GetMyFollowers)
 	api.GET("/logined_ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
 	})
