@@ -108,7 +108,7 @@ export default {
   async created() {
     await axios
     .get(`http://ebutuoy.to-hutohu.com/api/timeline`)
-    .then(response => (this.timeline = response))
+    .then(response => (this.timeline = response.data))
     .catch(error => console.log(error))
     console.log(this.timeline);
   }
