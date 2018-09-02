@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/middleware"
 	"github.com/nagisa-intern/ebutuoy/server/router"
 )
 
@@ -22,6 +23,10 @@ func main() {
 		panic(err)
 	}
 	e.Use(session.Middleware(store))
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins:     []string{"http://localhost:3000", "http://ebutuoy.to-hutohu.com"},
+		AllowCredentials: true,
+	}))
 
 	api := e.Group("/api")
 
