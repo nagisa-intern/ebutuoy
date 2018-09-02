@@ -9,7 +9,7 @@ const path = require('path')
 
 const BASE_DIR = process.env.BASE_DIR
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(function (req, res) {
   handler(req, res, (req, res) => {
     res.send('Not found')
   })
