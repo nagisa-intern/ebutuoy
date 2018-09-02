@@ -8,11 +8,11 @@
     <!-- タブ　-->
     <section class="container">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1"><a href="./timeline" target="_self">タイムライン</a></el-menu-item>
-        <el-menu-item index="2"><a href="./books" target="_self">本から選ぶ</a></el-menu-item>
+        <el-menu-item index="1"><a href="../timeline" target="_self">タイムライン</a></el-menu-item>
+        <el-menu-item index="2"><a href="./" target="_self">本から選ぶ</a></el-menu-item>
         <el-submenu index="3">
           <template slot="title">アカウント</template>
-          <el-menu-item index="2-1"><a href="./users/1" target="_self">プロフィール</a></el-menu-item>
+          <el-menu-item index="2-1"><a href="../users/1" target="_self">プロフィール</a></el-menu-item>
           <el-menu-item index="2-2">設定</el-menu-item>
           <el-menu-item index="2-3">ログアウト</el-menu-item>
         </el-submenu>
