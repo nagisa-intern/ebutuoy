@@ -33,7 +33,7 @@
           <el-card :body-style="{ padding: '0px' }">
             <img src="~/assets/images/square_thumb1.png" class="image">
             <div style="padding: 14px;">
-              <el-badge :value="120" class="item" :max="99">
+              <el-badge :value="20" class="item" :max="99">
                 <span>電波青年</span>
               </el-badge>
               <div class="bottom clearfix">
