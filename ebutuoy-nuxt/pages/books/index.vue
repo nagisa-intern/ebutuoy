@@ -67,7 +67,7 @@
   width="200"
   trigger="hover"
   content="this is content, this is content, this is content">
-  <el-button type="text" class="button" slot="reference"><a :href="`./${book.id}`" target="_self">本の詳細を見る</a></el-button>
+  <el-button type="text" class="button" slot="reference"><a :href="`../books/${book.id}`" target="_self">本の詳細を見る</a></el-button>
 </el-popover>
 </div>
 </div>
