@@ -24,7 +24,7 @@
           <el-col :span="6">
             <div style="width: 120px;" class="box">
               <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${data.comic_id}/square_thumb.jpeg`" :width="110" :height="110">
-              <p>{{getUsername(data.id)}}</p>
+              <p>{{getUsername(data.user_id)}}</p>
             </div>
           </el-col>
 
@@ -90,7 +90,8 @@ export default {
   },
   methods: {
     getUsername(id) {
-      return (this.users.find(u => u.id === id) || {username: ''}).username
+      console.log(this.users)
+      return (this.users.find(u => u.id === id) || {username: 'to-hutohu'}).username
     }
   }
 };
