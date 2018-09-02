@@ -1,29 +1,67 @@
 <template>
-  <section class="container">
+  <div>
+    <!-- Header　-->
     <div>
-      <h2 class="subtitle">
-        {{title}}
-      </h2>
-      <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${$route.params.id}/thumb.jpeg`">
-      <h2 class="subtitle">
-        概要
-        {{summary}}
-      </h2>
-      <div>
-        <nuxt-link to="viewer">READ</nuxt-link>
-      </div>
-      <div>
-        <nuxt-link to="/">BACK</nuxt-link>
-      </div>
-      <br><br>
+      <AppHeader></AppHeader>
+      <nuxt/>
     </div>
-  </section>
+
+    <section class="container">
+      <div>
+        <h2 class="subtitle">
+
+        </h2>
+        <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${$route.params.id}/thumb.jpeg`">
+        <span>概要</span>
+        <div>
+          <nuxt-link to="viewer">READ</nuxt-link>
+        </div>
+        <div>
+          <nuxt-link to="/">BACK</nuxt-link>
+        </div>
+        <br><br>
+      </div>
+    </section>
+
+    <!-- Footer　-->
+    <div class="books-footer">
+      <AppFooter></AppFooter>
+      <nuxt/>
+    </div>
+
+  </div>
 </template>
 
 <script>
-  import axios from 'axios'
-   
- </script>
+import AppHeader from '@/components/Header.vue';
+import AppFooter from '@/components/Footer.vue';
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
+//axios.defaults.baseURL = 'http://ebutuoy.to-hutohu.com/api'
+axios.defaults.baseURL = 'http://54.248.63.189/api'
+
+export default {
+  data() {
+    books: []
+  },
+  components: {
+    AppHeader,
+    AppFooter,
+  },
+  async created( ) {
+    await axios.get('/me').catch(async () => {
+      await axios.post('/me', {username: 'po', password: 'po'})
+    })
+    await axios
+    .get(`/comics/${params.id}`)
+    .then(response => (this.books = response.data))
+    .catch(error => console.log(error))
+    console.log(this.books);
+  }
+};
+
+</script>
 
 <style>
 .container {
