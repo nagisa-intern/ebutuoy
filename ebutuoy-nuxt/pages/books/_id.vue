@@ -23,6 +23,11 @@
       </div>
     </section>
 
+    <div>
+      <textarea id="" v-model="text" name="" cols="30" rows="10"></textarea>
+      <button @click="postComments">comment</button>
+    </div>
+
     <!-- Footer　-->
     <div class="books-footer">
       <AppFooter></AppFooter>
@@ -43,7 +48,10 @@ axios.defaults.baseURL = 'http://54.248.63.189/api'
 
 export default {
   data() {
-    books: []
+    return {
+      books: [],
+      text: ""
+    }
   },
   components: {
     AppHeader,
@@ -58,6 +66,12 @@ export default {
     .then(response => (this.books = response.data))
     .catch(error => console.log(error))
     console.log(this.books);
+  },
+  methods: {
+    async postComments() {
+      await axios.post(`/comics/${this.$route.params.id}/comments`, {content: this.text})
+      this.text = ''
+    }
   }
 };
 

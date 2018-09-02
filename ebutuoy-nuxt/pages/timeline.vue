@@ -23,7 +23,7 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <div style="width: 120px;" class="box">
-              <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
+              <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${data.comic_id}/square_thumb.jpeg`" :width="110" :height="110">
               <p>{{getUsername(data.id)}}</p>
             </div>
           </el-col>
