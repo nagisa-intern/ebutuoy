@@ -33,7 +33,7 @@ services:
   client:
     build: 
       context: .
-      dockerfile: ./Docker/client
+      dockerfile: ./Docker/client/Dockerfile
     depends_on:
       - server
   nginx:
