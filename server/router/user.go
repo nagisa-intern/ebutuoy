@@ -158,3 +158,9 @@ func (r *Router) GetMyComments(c echo.Context) error {
 	r.db.Where("user_id = ?", myID).Find(comments)
 	return c.JSON(http.StatusOK, comments)
 }
+
+func (r *Router) GetUsers(c echo.Context) error {
+	users := &[]db.User{}
+	r.db.Find(users)
+	return c.JSON(http.StatusOK, users)
+}
