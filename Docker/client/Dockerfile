@@ -4,7 +4,7 @@ ENV NODE_ENV=production
 ENV HOST 0.0.0.0
 
 RUN mkdir -p /client
-COPY ../client /client
+COPY ../ebutuoy-nuxt /client
 WORKDIR /client
 
 EXPOSE 3000
