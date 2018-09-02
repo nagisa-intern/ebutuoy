@@ -21,55 +21,61 @@
       <!-- カルーセル　-->
       <!--
       <el-carousel trigger="click" height="250px" >
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h3>{{ item }}</h3>
-        </el-carousel-item>
-      </el-carousel>
-      -->
-
-      <!-- 本一覧　-->
-      <el-row>
-        <el-col :span="8" v-for="(o, index) in 17" :key="o" :offset="index > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }">
-            <!--<img :src="`/images/square_thumb${o}.png`" class="image">-->
-            <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${o}/square_thumb.jpeg`" class="image">
-            <div style="padding: 14px;">
-              <el-badge :value="20" class="item" :max="99">
-                <span>作品タイトル</span>
-              </el-badge>
-              <div class="bottom clearfix">
-                <span>作者名</span>
-                <br>
-                <div class="hashtag">
-                  <el-tag type="info">#ホラー</el-tag>
-                </div>
-                <div class="hashtag">
-                  <el-tag type="info">#コメディー</el-tag>
-                </div>
-                <div class="hashtag">
-                  <el-tag type="info">#人気</el-tag>
-                </div>
-                <el-button type="text" class="button">本の詳細を見る</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
+      <el-carousel-item v-for="item in 4" :key="item">
+      <h3>{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+-->
 
 
-    </section>
-    <!-- Footer　-->
-    <div class="books-footer">
-      <AppFooter></AppFooter>
-      <nuxt/>
-    </div>
-  </div>
+
+<!-- 本一覧　-->
+<el-row>
+  <el-col :span="8" v-for="(o, index) in 17" :key="o" :offset="index > 0 ? 2 : 0">
+    <el-card :body-style="{ padding: '0px' }">
+      <!--<img :src="`/images/square_thumb${o}.png`" class="image">-->
+      <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${o}/square_thumb.jpeg`" class="image">
+      <div style="padding: 14px;">
+        <el-badge :value="20" class="item" :max="99">
+          <span>作品タイトル</span>
+        </el-badge>
+        <div class="bottom clearfix">
+          <span>作者名</span>
+          <br>
+          <div class="hashtag">
+            <el-tag type="info">#ホラー</el-tag>
+          </div>
+          <div class="hashtag">
+            <el-tag type="info">#コメディー</el-tag>
+          </div>
+          <div class="hashtag">
+            <el-tag type="info">#人気</el-tag>
+          </div>
+          <el-button type="text" class="button">本の詳細を見る</el-button>
+        </div>
+      </div>
+    </el-card>
+  </el-col>
+</el-row>
+
+
+</section>
+<!-- Footer　-->
+<div class="books-footer">
+  <AppFooter></AppFooter>
+  <nuxt/>
+</div>
+</div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header.vue';
 import AppFooter from '@/components/Footer.vue';
 import axios from 'axios'
+
+axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'http://ebutuoy.to-hutohu.com/api'
+axios.defaults.baseURL = 'http://54.248.63.189/api'
 
 export default {
   data() {
@@ -91,7 +97,13 @@ export default {
     AppFooter,
   },
   async created() {
-    this.books = await axios.get(`http://ebutuoy.to-hutohu.com/api/comics`)
+    await axios.get('/me').catch(async () => {
+      await axios.post('/me', {username: 'po', password: 'po'})
+    })
+    await axios
+    .get(`/comics`)
+    .then(response => (this.books = response.data))
+    .catch(error => console.log(error))
     console.log(this.books);
   }
 };

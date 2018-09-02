@@ -106,7 +106,10 @@ export default {
     AppFooter,
   },
   async created() {
-    this.timeline = await axios.get(`http://ebutuoy.to-hutohu.com/api/timeline`)
+    await axios
+    .get(`http://ebutuoy.to-hutohu.com/api/timeline`)
+    .then(response => (this.timeline = response))
+    .catch(error => console.log(error))
     console.log(this.timeline);
   }
 };
