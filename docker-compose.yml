@@ -31,6 +31,7 @@ services:
     ports:
       - "1323:1323"
   client:
+    context: .
     build: ./Docker/client
     depends_on:
       - server
