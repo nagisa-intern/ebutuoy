@@ -22,67 +22,68 @@
       <el-card class="box-card">
         <!--
         <div slot="header" class="clearfix">
-          <span>◯◯◯◯◯(本タイトル)</span>
-          <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
+        <span>◯◯◯◯◯(本タイトル)</span>
+        <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
+      </div>
+    -->
+    <el-row :gutter="20">
+
+      <el-col :span="6">
+        <div style="width: 120px;" class="box">
+          <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
+          <p>user_name</p>
         </div>
-      -->
-        <el-row :gutter="20">
+      </el-col>
 
-          <el-col :span="6">
-            <div style="width: 120px;" class="box">
-              <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
-              <p>user_name</p>
-            </div>
-          </el-col>
-
-          <el-col :span="12">
-          <div style="width: 280px;" class="text item box">
-            <p>ああああああああああ</p>
-            <el-button type="text" class="button">本の詳細を見る</el-button>
-          </div>
-        </el-col>
-      </el-row>
-      </el-card>
-
-
-      <el-card class="box-card">
-        <!--
-        <div slot="header" class="clearfix">
-          <span>◯◯◯◯◯(本タイトル)</span>
-          <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
+      <el-col :span="12">
+        <div style="width: 280px;" class="text item box">
+          <p>ああああああああああ</p>
+          <el-button type="text" class="button">本の詳細を見る</el-button>
         </div>
-      -->
-        <el-row :gutter="20">
-
-          <el-col :span="6">
-            <div style="width: 120px;" class="box">
-              <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
-              <p>user_name</p>
-            </div>
-          </el-col>
-
-          <el-col :span="12">
-          <div style="width: 280px;" class="text item box">
-            <p>ああああああああああ</p>
-            <el-button type="text" class="button">本の詳細を見る</el-button>
-          </div>
-        </el-col>
-      </el-row>
-      </el-card>
+      </el-col>
+    </el-row>
+  </el-card>
 
 
-    </section>
-    <!-- Footer　-->
-    <div class="timeline-footer">
-      <AppFooter></AppFooter>
-      <nuxt/>
-    </div>
+  <el-card class="box-card">
+    <!--
+    <div slot="header" class="clearfix">
+    <span>◯◯◯◯◯(本タイトル)</span>
+    <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
   </div>
+-->
+<el-row :gutter="20">
+
+  <el-col :span="6">
+    <div style="width: 120px;" class="box">
+      <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
+      <p>user_name</p>
+    </div>
+  </el-col>
+
+  <el-col :span="12">
+    <div style="width: 280px;" class="text item box">
+      <p>ああああああああああ</p>
+      <el-button type="text" class="button">本の詳細を見る</el-button>
+    </div>
+  </el-col>
+</el-row>
+</el-card>
+
+
+</section>
+<!-- Footer　-->
+<div class="timeline-footer">
+  <AppFooter></AppFooter>
+  <nuxt/>
+</div>
+</div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header.vue';
 import AppFooter from '@/components/Footer.vue';
+import axios from 'axios'
 
 export default {
   data() {
@@ -91,7 +92,8 @@ export default {
       activeName: 'first',
       activeIndex: '1',
       activeIndex2: '1',
-      currentDate: new Date()
+      currentDate: new Date(),
+      timeline: []
     };
   },
   methods: {
@@ -103,6 +105,10 @@ export default {
     AppHeader,
     AppFooter,
   },
+  async created() {
+    this.timeline = await axios.get(`http://ebutuoy.to-hutohu.com/api/timeline`)
+    console.log(this.timeline);
+  }
 };
 </script>
 

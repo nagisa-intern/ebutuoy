@@ -29,15 +29,16 @@
 
       <!-- 本一覧　-->
       <el-row>
-        <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
+        <el-col :span="8" v-for="(o, index) in 17" :key="o" :offset="index > 0 ? 2 : 0">
           <el-card :body-style="{ padding: '0px' }">
-            <img src="~/assets/images/square_thumb1.png" class="image">
+            <!--<img :src="`/images/square_thumb${o}.png`" class="image">-->
+            <img :src="`https://s3-ap-northeast-1.amazonaws.com/nagisa-intern/comic/${o}/square_thumb.jpeg`" class="image">
             <div style="padding: 14px;">
               <el-badge :value="20" class="item" :max="99">
-                <span>電波青年</span>
+                <span>作品タイトル</span>
               </el-badge>
               <div class="bottom clearfix">
-                <span>ほんのあらすじ</span>
+                <span>作者名</span>
                 <br>
                 <div class="hashtag">
                   <el-tag type="info">#ホラー</el-tag>
@@ -68,6 +69,7 @@
 <script>
 import AppHeader from '@/components/Header.vue';
 import AppFooter from '@/components/Footer.vue';
+import axios from 'axios'
 
 export default {
   data() {
@@ -75,7 +77,8 @@ export default {
       radio: 1,
       activeName: 'first',
       activeIndex: '2',
-      currentDate: new Date()
+      currentDate: new Date(),
+      books: []
     };
   },
   methods: {
@@ -87,6 +90,10 @@ export default {
     AppHeader,
     AppFooter,
   },
+  async created() {
+    this.books = await axios.get(`http://ebutuoy.to-hutohu.com/api/comics`)
+    console.log(this.books);
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <b><nuxt-link to="/">#チームb_ebtuuoy   ＼＼\\ ٩(*'ω'*)و //／／</nuxt-link></b>
+    <b><nuxt-link to="/">#チームb_ebutuoy   ＼＼\\ ٩(*'ω'*)و //／／</nuxt-link></b>
   </div>
 </template>
 
