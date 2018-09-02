@@ -30,11 +30,14 @@ services:
       - mysql
     ports:
       - "1323:1323"
-
+  client:
+    build: ./Docker/client
+    depends_on:
+      - server
   nginx:
     build: ./Docker/nginx
     depends_on:
-      - server
+      - client
     ports:
       - "80:80"
       - "443:443"
