@@ -1,0 +1,76 @@
+version: '2'
+services: 
+  mysql:
+    build: ./Docker/mysql
+    volumes:
+      - "./Docker/mysql:/var/lib/mysql"
+    #  - "./Docker/mysql/init:/docker-entrypoint-initdb.d"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test #$MYSQL_DB_NAME
+      MYSQL_USERNAME: root #$MYSQL_USERNAME
+      MYSQL_PASSWORD: root #$MYSQL_PASSWORD
+      MYSQL_PORT: 3306
+    ports:
+      - "3306:3306"
+  
+  server:
+    build: 
+      context: ./server
+      dockerfile: ../Docker/server/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DB_NAME: test #$MYSQL_DB_NAME
+      MYSQL_USERNAME: root #$MYSQL_USERNAME
+      MYSQL_PASSWORD: root #$MYSQL_PASSWORD
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysql
+    ports:
+      - "1323:1323"
+
+  nginx:
+    build: ./Docker/nginx
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+      - "443:443"
+
+#   server:
+  
+#   nginx-proxy:
+#     image: jwilder/nginx-proxy
+#     container_name: nginx-proxy
+#     privileged: true
+#     ports:
+#       - 80:80
+#       - 443:443
+#     volumes:
+#       - /srv/docker/nginx-proxy-with-encrypt/certs:/etc/nginx/certs:ro
+#       - /srv/docker/nginx-proxy-with-encrypt/htpasswd:/etc/nginx/htpasswd
+#       - /etc/nginx/vhost.d
+#       - /usr/share/nginx/html
+#       - /var/run/docker.sock:/tmp/docker.sock:ro
+#       - /srv/docker/nginx-proxy-with-encrypt/log:/var/log/nginx
+#     networks:
+#       - default
+#       - ssl_proxy
+#     restart: always
+  
+#   letsencrypt-nginx:
+#     image: jrcs/letsencrypt-nginx-proxy-companion
+#     container_name: letsencrypt-nginx
+#     privileged: true
+#     volumes:
+#       - /srv/docker/nginx-proxy-with-encrypt/certs:/etc/nginx/certs:rw
+#       - /var/run/docker.sock:/var/run/docker.sock:ro
+#     volumes_from:
+#       - nginx-proxy
+#     restart: always
+#   front:
+
+# networks:
+#   ssl_proxy:
+#     external: true
