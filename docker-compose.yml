@@ -31,11 +31,11 @@ services:
     ports:
       - "1323:1323"
 
-  nginx:
-    build: ./Docker/nginx
-    ports:
-      - "80:80"
-      - "443:443"
+  # nginx:
+  #   build: ./Docker/nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
 
 #   server:
   
