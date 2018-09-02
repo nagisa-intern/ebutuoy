@@ -48,7 +48,7 @@ func main() {
 	api.GET("/logined_ping", func(c echo.Context) error {
 		return c.String(http.StatusOK, "pong")
 	})
-	e.Logger.Fatal(e.Start("localhost:1323"))
+	e.Logger.Fatal(e.Start(":1323"))
 }
 
 func pong(c echo.Context) error {
