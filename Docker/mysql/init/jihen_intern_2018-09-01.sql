@@ -23,6 +23,9 @@
 # テーブルのダンプ authors
 # ------------------------------------------------------------
 USE test;
+SET CHARACTER_SET_CLIENT = utf8mb4;
+SET CHARACTER_SET_CONNECTION = utf8mb4;
+
 DROP TABLE IF EXISTS `authors`;
 
 CREATE TABLE `authors` (
