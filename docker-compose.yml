@@ -1,8 +1,7 @@
 version: '2'
 services: 
   mysql:
-    build: 
-      dockerfile: ../Docker/mysql/Dockerfile
+    build: ./Docker/mysql
     volumes:
       - "./Docker/mysql:/var/lib/mysql"
     #  - "./Docker/mysql/init:/docker-entrypoint-initdb.d"
