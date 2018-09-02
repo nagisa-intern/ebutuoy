@@ -11,7 +11,7 @@ const BASE_DIR = process.env.BASE_DIR
 
 const server = http.createServer((req, res) => {
   handler(req, res, (req, res) => {
-    res.send('Not found')
+    return
   })
 }).listen(3000)
 
