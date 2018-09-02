@@ -1,11 +1,11 @@
 version: '2'
 services: 
   mysql:
-    image: mysql:5.6
-    #command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    build: 
+      dockerfile: ../Docker/mysql/Dockerfile
     volumes:
       - "./Docker/mysql:/var/lib/mysql"
-      - "./Docker/mysql/init:/docker-entrypoint-initdb.d"
+    #  - "./Docker/mysql/init:/docker-entrypoint-initdb.d"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test #$MYSQL_DB_NAME
