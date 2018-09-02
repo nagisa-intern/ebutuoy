@@ -19,71 +19,39 @@
       </el-menu>
 
       <!-- タイムライン -->
-      <el-card class="box-card">
-        <!--
-        <div slot="header" class="clearfix">
-        <span>◯◯◯◯◯(本タイトル)</span>
-        <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
-      </div>
-    -->
-    <el-row :gutter="20">
+      <el-card class="box-card" v-for="data in timeline" :key="data.id">
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <div style="width: 120px;" class="box">
+              <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
+              <p>{{getUsername(data.id)}}</p>
+            </div>
+          </el-col>
 
-      <el-col :span="6">
-        <div style="width: 120px;" class="box">
-          <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
-          <p>user_name</p>
-        </div>
-      </el-col>
-
-      <el-col :span="12">
-        <div style="width: 280px;" class="text item box">
-          <p>ああああああああああ</p>
-          <el-button type="text" class="button">本の詳細を見る</el-button>
-        </div>
-      </el-col>
-    </el-row>
-  </el-card>
-
-
-  <el-card class="box-card">
-    <!--
-    <div slot="header" class="clearfix">
-    <span>◯◯◯◯◯(本タイトル)</span>
-    <el-button style="float: right; padding: 3px 0" type="text">本の詳細画面へ</el-button>
+          <el-col :span="12">
+            <div style="width: 280px;" class="text item box">
+              <p>{{data.content}}</p>
+              <el-button type="text" class="button" @click="$router.push('/books/' + data.comic_id)">本の詳細を見る</el-button>
+            </div>
+          </el-col>
+        </el-row>
+      </el-card>
+    </section>
+    <!-- Footer　-->
+    <div class="timeline-footer">
+      <AppFooter></AppFooter>
+      <nuxt/>
+    </div>
   </div>
--->
-<el-row :gutter="20">
-
-  <el-col :span="6">
-    <div style="width: 120px;" class="box">
-      <img src="~/assets/images/sample_icon.jpeg" class="image"  :width="120" :height="120">
-      <p>user_name</p>
-    </div>
-  </el-col>
-
-  <el-col :span="12">
-    <div style="width: 280px;" class="text item box">
-      <p>ああああああああああ</p>
-      <el-button type="text" class="button">本の詳細を見る</el-button>
-    </div>
-  </el-col>
-</el-row>
-</el-card>
-
-
-</section>
-<!-- Footer　-->
-<div class="timeline-footer">
-  <AppFooter></AppFooter>
-  <nuxt/>
-</div>
-</div>
 </template>
 
 <script>
 import AppHeader from '@/components/Header.vue';
 import AppFooter from '@/components/Footer.vue';
 import axios from 'axios'
+// axios.defaults.baseURL = 'http://ebutuoy.to-hutohu.com/api/'
+axios.defaults.baseURL = 'http://54.248.63.189/api/'
+axios.defaults.withCredentials = true
 
 export default {
   data() {
@@ -93,7 +61,9 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       currentDate: new Date(),
-      timeline: []
+      timeline: [],
+      users: [],
+      comics: []
     };
   },
   methods: {
@@ -106,11 +76,22 @@ export default {
     AppFooter,
   },
   async created() {
+    await axios.get('/me').catch(() => axios.post('/me', {username: 'tohutohu', password: 'tohutohu'}))
+    await axios.post('/users/1/friendship').catch(() => {})
     await axios
-    .get(`http://ebutuoy.to-hutohu.com/api/timeline`)
-    .then(response => (this.timeline = response))
+    .get(`/timeline`)
+    .then(response => (this.timeline = response.data))
     .catch(error => console.log(error))
+    await axios.get('/me/follows').then(res => this.users = res.data)
+    await axios.get('/comics').then(res => this.comics = res.data)
     console.log(this.timeline);
+    console.log(this.users);
+    console.log(this.comics);
+  },
+  methods: {
+    getUsername(id) {
+      return (this.users.find(u => u.id === id) || {username: ''}).username
+    }
   }
 };
 </script>
